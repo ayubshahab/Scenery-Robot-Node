@@ -1167,7 +1167,8 @@ function sendFetchRequest(){
   xhr.setRequestHeader("Content-Type", "application/json");
   var data = JSON.stringify({ path: data });
   xhr.send(data);
-  data - [];
+  console.log("fetch request sent");
+  //data - [];
 }
 
 function getData(){
@@ -1185,6 +1186,7 @@ function getData(){
         oldData = getData;
         getData = null; //iffffy --------------------------------------
       }
+      console.log("waiting to receive data from python script");
   });
   }, delayInMilliseconds);
 }

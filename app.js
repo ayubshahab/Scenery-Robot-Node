@@ -43,6 +43,7 @@ app.post("/groundPlan", function(req, res){
 
 //#region 
 function callWhenclicked(dataInput){
+  console.log("recieved data in api");
   const{ spawn = () => null } = require('child_process');
   var data = dataInput;
 
