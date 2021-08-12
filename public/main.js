@@ -1162,7 +1162,7 @@ function sendFetchRequest(){
   }
 
   var xhr = new XMLHttpRequest();
-  var url = "http://localhost:3000/callPython";
+  var url = "https://scenery-robot-node.herokuapp.com/callPython";
   xhr.open("POST", url, true);
   xhr.setRequestHeader("Content-Type", "application/json");
   var data = JSON.stringify({ path: data });
