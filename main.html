@@ -1,0 +1,488 @@
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js" integrity="sha512-wBcFatf7yQavHQWtf4ZEjvtVz4XkYISO96hzvejfh18tn3OrJ3sPBppH0B6q/1SHB4OKHaNNUKqOmsiTGlOM/g==" crossorigin="anonymous"></script>
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>
+  
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+      <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+      <!--  This is the css for the index.html page-->
+      <link rel="stylesheet" type="text/css" href="css/style.css" />
+      <title>Document</title>
+
+
+      <!--Used for dxf file formating-->
+
+    </head>
+    <body>
+      <div class="headerContainer">
+        <!--          This is the navbar        -->
+        <div class="navbar">
+          <div class="logo">
+            Scenery Robot
+          </div>
+          <div class="navlinks">
+            <ul>
+              <li><a href="">Github</a></li>
+              <li><a href="">Wiki</a></li>
+              <li onclick="toggleModalOn()"><a>Tutorial</a></li>
+            </ul>
+          </div>
+        </div>
+        <!--  Modal Box container-->
+        <div class = "modalOuter" id = "modalOuter">
+          <div class = "tutorialModal" id = "tutorialModal">
+            <div class="outerXBox" >
+              <div class="innerXBox" >
+                <label class = "xBarBack" onclick = " toggleModalOff()">Back</label>
+              </div>
+            </div>
+            <div class = "infoContainerModal">
+              <div class = "inputTutorial">
+                <div class = "leftText1">
+                  <h2>To get Started:</h2>
+                  <ul>
+                    <li>Click the <mark style = "color:#f05627;">HOME</mark> icon from the right panel and enter the Width and Depth of your stage in feet.</li>
+                    <li>Select any additional inches from the drop down options.</li>
+                    <li>Adjust the Interval Rate (for points extraction) using the range slider.</li>
+                    <li>Then click the <mark style = "color:#f05627;">SUBMIT</mark> button. You can now begin drawing.</li>
+                  </ul>
+                </div>
+                <div class = "rightImage1">
+                  <img src="/media/Tutorial/Home/InputingDimensions.jpg" alt="" style = "width: 100%; height: 100%; border: 1px black solid;">
+                </div>
+              </div>
+              <div class = "pathOverview">
+                <div class = "pathTextArea">
+                  <h2>Understanding the path drawn</h2>
+                  <p>When you draw something on screen, the program automatically starts extracting critical points (locations your mouse has been) based on a default interval rate. The dault rate is set to .05 second, as shown in the following image, and can be adjusted using the range slider. An increase in the interval rate results in a decrease in the number of critical points that are extracted. When modifying the range slider, it is important to press the <mark style = "color:#f05627;">SUBMIT</mark> button again as this is what updates the program with any changes that may have been made. These critical points are essential to the program as they are converted into feet and inches and sent to the robot when such a request is made by the user.</p>
+                </div>
+                <div class = "pathImgArea">
+                  <div class = "pathImgCont" >
+                    <img src="/media/Tutorial/PathDrawn/UserDrawingToggle.jpg" alt="" style = "width: 100%; height:100%;" id = "pathImgCont">
+                  </div>
+                  <div class = "rightSide">
+                    <img src="/media/Tutorial/PathDrawn/CriticalPointsToggle.jpg" alt="" style = "width: 100%; height: 100%;" id = "rightSide">
+                  </div>
+                  <div class = "sliderImg" style = "position: absolute; width: 40%; height: 50px; background-color: yellow; top: 8%; right: 2.5%;">
+                    <img src="/media/Tutorial/PathDrawn/RangeSlider.jpg" alt="" style = "width: 100%; height: 100%;">
+                  </div>
+                  <div style = "width: 40%; height: auto; background-color: white; position: absolute; bottom: 3%; left: 1%; padding-left: .5%;">
+                    <h3 style = "margin-bottom: 1%;">Viewing Points Extracted & Line Drawn</h3>
+                    <p>To view the points that have been extracted, use the toggle switch under the <mark style = "color:#f05627;">PENCIL</mark> icon labeled as "Critical Points". To toggle and untoggle the drawn line, use the switch labeled as "User Drawing".</p>
+                  </div>
+                </div>
+              </div>
+              <div class = "gridOverview">
+                <div class = "gridTextArea" style = "background-color: white;">
+                  <div style = "float: left; width: 40%; text-align: center; justify-content: center; display: flex; flex-direction: column; border-right: 2px #f05627 solid; padding: 2%;">
+                    <h2>The Grid Function</h2>
+                    <p>The grid function of this program relies on the dimensions of the stage inputted as well as the interval rate selected from the drop down from inside the Grid Tab.</p>
+                  </div>
+                  <div style = "float: right; width: 60%; padding-left: 2%">
+                    <h3>To toggle the grid feature: </h3>
+                    <ul>
+                      <li>Click the <mark style = "color:#f05627;">HOME</mark> Icon and enter the respective dimensions of the stage, then click <mark style = "color:#f05627;">SUBMIT</mark>.</li>
+                      <li>Select the <mark style = "color:#f05627;">GRID</mark> Icon and choose the interval rate from the drop down</li>
+                      <li>Press the Grid Display Switch to turn on grid display</li>
+                      <li>To change the Grid Interval Display, simply select a new Grid Interval rate from the drop down and re-toggle the Grid Display Switch.</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class = "gridImgArea">
+                  <div class = "gridImgWheel" id = "gridWheel">
+                    <div class = "gridImg gridImg1">
+                      <h5 style = "position: absolute; bottom: 0; left: 5%;">Using Grid Function</h5>
+                    </div>
+                    <div class = "gridImg gridImg2">
+                      <h5 style = "position: absolute; bottom: 0; left: 5%;">1/2 Interval Rate</h5>
+                    </div>
+                    <div class = "gridImg gridImg3">
+                      <h5 style = "position: absolute; bottom: 0; left: 5%;">1/3 Interval Rate</h5>
+                    </div>
+                    <div class = "gridImg gridImg4">
+                      <h5 style = "position: absolute; bottom: 0; left: 5%;">1/4 Interval Rate</h5>
+                    </div>
+                    <div class = "gridImg gridImg5">
+                      <h5 style = "position: absolute; bottom: 0; left: 5%;">1/5 Interval Rate</h5>
+                    </div>
+                    <div class = "gridImg gridImg6">
+                      <h5 style = "position: absolute; bottom: 0; left: 5%;">1/6 Interval Rate</h5>
+                    </div>
+                    <div class = "gridImg gridImg7">
+                      <h5 style = "position: absolute; bottom: 0; left: 5%;">1/7 Interval Rate</h5>
+                    </div>
+                    <div class = "gridImg gridImg8">
+                      <h5 style = "position: absolute; bottom: 0; left: 5%;">1/8 Interval Rate</h5>
+                    </div>
+                    <!-- Next and previous buttons -->
+                    <a id = "leftButton" class="prev" onclick="">&#10094</a>
+                    <a id = "rightButton" class="next" onclick="scrollRight();">&#10095</a>
+                  </div>
+                </div>
+              </div>
+              <div class = "canvasOverview">
+                <div class = "canvasTextArea">
+                  <h2>Canvas Layers</h2>
+                  <p>This program utilizes various layers of canvas' to provide as much information as possible.</p>
+                  <ul>
+                    <li>The <mark style = "color:#4f5d75;">Grid Canvas</mark> displays the grid intervals and can be toggled On and Off under the <mark style = "color:#f05627;">GRID</mark> Icon.</li>
+                    <li>The <mark style = "color:#FF4200;">Ground Plan Canvas</mark> displays the user uploaded ground plan of the stage and can be toggled On and Off under the <mark style = "color:#f05627;">GROUND PLAN</mark> Icon.</li>
+                    <li>The <mark style = "color:#ef8354;">User Drawing Canvas</mark> sits on top of the Ground Plan Canvas and Grid Canvas and this layer is where the user draws the desired path. This Canvas can be toggled On and OFf under the <mark style = "color:#f05627;">PENCIL</mark> Icon.</li>
+                    <li>The <mark style = "color:#b6c0c0;">Critical Points/ Edit Canvas</mark> sits on top of the User Drawing Canvas and this is used to display the critical points that the program is keeping track off as well as allow the user to make modifications to the track via the Erase Function. Both the toggle switch for this canvas and the Erase Function can be found under the <mark style = "color:#f05627;">PENCIL</mark> Icon. </li>
+                  </ul>
+                  <p> <mark style = "font-size: 25px;">Note: </mark>The "Critical Points" toggled switch, under the <mark style = "color:#f05627;">PENCIL</mark> icon, toggles the Critical Points/ Edit Canvas, however, while the Points Canvas is enabled, the user cannot draw additional paths. The Points Canvas must be disabled to draw paths and can only be used to erase/ edit the path drawn.</p>
+
+                  <p> <mark style = "font-size: 25px;">Note: </mark>When you start using this program, you must maintian the same window size from start to finish, or anytime you may come back to continue working on a program you were working on previously. The recommended size is just to maximize the window screen as this alleviates any potential problems.</p>
+                </div>
+                <div class = "canvasPanelArea">
+                  <div style = "width: 60%; height: 50%; background-color: #4f5d75; z-index: 99; position: absolute; top:10%; left: 10%; padding: 2%;">
+                    <h5 style = "color:white;">4) Grid Canvas</h5>
+                  </div>
+
+                  <div style = "width: 60%; height: 50%; background-color: #FF4200; z-index: 100; position: absolute; top:20%; left: 20%;">
+                    <h5 style = "color:white; padding: 2%;">3) Ground Plan Canvas</h5>
+                  </div>
+                  <div style = "width: 60%; height: 50%; background-color: #ef8354; z-index: 101; position: absolute; top:30%; left: 30%;">
+                    <h5 style = "color:white; padding: 2%;">2) User Drawing Canvas</h5>
+                  </div>
+                  <div style = "width: 60%; height: 50%; background-color: #b6c0c0; z-index: 102; position: absolute; top:40%; left: 40%;">
+                    <h5 style = "color:white; padding: 2%;">1) Critical Points/ Edit Canvas</h5>  
+                  </div>
+                </div>
+              </div>
+              <div class = "featuresOverview">
+                <h2>How To</h2>
+                <div class = "featuresTop">
+                  <div class = "drawingFunction square" style = "float: left;">
+                    <i class="fa fa-pencil" style='font-size:48px;color:black'></i>
+                  </div>
+                  <div class = "editFunction square" style = "float: left;">
+                    <i class='fa fa-eraser' style='font-size:48px;color:black'></i>
+                  </div>
+                  <div class = "saveUpload square" style = "float: left;" >
+                    <i class="fa fa-save" style="font-size:48px;color:black"></i></div>
+                  <div class = "other square" style = "float: left;">
+                    <i class="fa fa-info-circle" style="font-size:48px;color:black"></i>
+                  </div>
+                </div>
+                <div class = "featuresTextArea type1">
+                  <div class = "info">
+                    <h3>The Drawing Function</h3>
+                    <p>We have already briefly coverd the drawing function up above. Simply, select the <mark style = "color:#f05627;">HOME</mark> icon, enter the respective dimensions of the stage, and click the <mark style = "color:#f05627;">SUBMIT</mark> button. You should be able to draw paths anywhere on the screen, however there are some things to pay attention to when drawing. </p>
+                    <ul>
+                      <li> Once a path has been drawn, the only way to continue drawing is to either draw at the beginning of the path or the end.</li>
+                      <li>Since the robot cannot teleport around stage, there must be a single continuous path at all times.</li>
+                      <li>When you are done drawing a path, you can select the <mark style = "color:#f05627;">PENCIL</mark> icon and toggle the "Critical Points" switch to visualize the critical points captured by the program.</li>
+                      <li>When you use the edit feature in the middle of a path, the next line can only be drawn starting from one of the edit locations, indicated by a red dot, and must connect with the other edit location.</li>
+                    </ul>
+                  </div>
+                  <div class = "imgArea">
+                    <div class = "images drawImg1">
+                    </div>
+                    <div class = "images drawImg2">
+                    </div>
+                  </div>
+                </div>
+                <div class = "featuresTextArea type2" style = "height: 500px">
+                  <div class = "info">
+                    <h3>The Erase Function</h3>
+                    <p>The erase function is used to edit in the middle of paths as well as erase entire paths drawn. To erase, simply toggle the "Critical Points/ Edit Canvas" switch under the <mark style = "color:#f05627;">PENCIL</mark> icon which will highlight all the critical points that are stored in the program. Then you can select any two points and click the erase button. There are four such cases of using the Erase Function.</p>
+                    <ul>
+                      <li style = "margin-bottom: 2%;"> The first case is when you select somewhere in the middle of the path and the last point in the path. In this case, the user can start drawing from the middle point that was selected as this becomes the new end point.</li>
+                      <li style = "margin-bottom: 2%;">The second case is when you select somewhere in the middle of the path and the first point in the path. In this case, the user can also start drawing from the middle point as this becomes the new start point. </li>
+                      <li style = "margin-bottom: 2%;">The third case is when you select two points that are in the middle of the path drawn. In this case, using the erase function results in only being able to draw from one of the middle edit points. You must first complete the path between these two points before you can start drawing elsewehere.</li>
+                      <li style = "margin-bottom: 2%;">The last case is when the first and last points in the path are selected. In this case, the user can start drawing anywhere on the canvas after pressing the "Erase" button.</li>
+                    </ul>
+                  </div>
+                  <div class = "imgArea">
+                    <div class = "images eraseImg1">
+                    </div>
+                    <div class = "images eraseImg2">
+                    </div>
+                    <div class = "images eraseImg3">
+                    </div>
+                    <div class = "images eraseImg4">
+                    </div>
+                  </div>
+                </div>
+                <div class = "featuresTextArea type3">
+                  <div class = "saveWorkspace">
+                    <h3>Saving your Workspace</h3>
+                    <p>After you are done drawing your paths, select the <mark style = "color:#f05627;">CLOUD</mark> icon and press the <mark style = "color:#f05627;">SAVE</mark> button and the program will allow you to save your workspace to your desired location. <mark>NOTE:</mark> the dimensions (size) of your browser window must be the exact same when you upload and start working again.</p>
+                    <div class = "saveImg saveImg1"></div>
+                  </div>
+                  <div class = "uploadWorkspace">
+                    <h3>Uploading your Workspace</h3>
+                    <p>To begin working where you left off, you must first resize your browser window to the dimensions that you were using before you saved your workspace. To upload your workspace, simply select the <mark style = "color:#f05627;">CLOUD</mark> icon and click the <mark style = "color:#f05627;">UPLOAD WORKSPACE</mark> button and the program will allow you to select the desired file.</p>
+                    <div class = "saveImg saveImg2"></div>
+                  </div>
+                </div>
+                <div class = "featuresTextArea type4" style = "height: 300px;">
+                  <div class = "verticalBlock">
+                    <h3>Get Points</h3>
+                    <p>The "Get Points" button, under the <mark style = "color:#f05627;">PENCIL</mark> icon, allows you to see the coordinates of the critical points stored in the program converted into feet/inches.</p>
+                    <div class = "demo extraImg1"></div>
+                  </div>
+                  <div class = "verticalBlock">
+                    <h3>Reset</h3>
+                    <p>The "Reset" button, under the <mark style = "color:#f05627;">PENCIL</mark> icon, allows you to reset the program where all the stored data is discarded.</p>
+                    <div class = "demo extraImg2"></div>
+                  </div>
+                  <div class = "verticalBlock">
+                    <h3>Copy Points to Clipboard</h3>
+                    <p>The "Copy Points to Clipboard" button, under the <mark style = "color:#f05627;">PENCIL</mark> icon, is utilized after the "Get Points" button is pressed and coordinates (in feet/inches) are obtained. Allows for easier copy/paste functionality.</p>
+                    <div class = "demo extraImg3"></div>
+                  </div>
+                  <div class = "verticalBlock">
+                    <h3>Send Path to Robot</h3>
+                      <p>After you are done drawing a path, the set of critical points stored in the program can be sent to the robot via the <mark style = "color:#f05627;">SEND PATH TO ROBOT</mark> icon which automatically converts the coordinates into feet/inches.</p>
+                    <div class = "demo extraImg4"></div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--          This container holds the canvas and the right input and output container        -->
+        <div class="innerContainer" id = "innerCont">
+          <!--          These are the canvases       -->
+          <div class = "leftContainer" id = "leftCont"> 
+            <canvas
+            id="gridCanvas"
+            class="backgroundCanvas"> <!-- This canvas stores grid lines-->
+          </canvas>
+          <canvas 
+            id = "groundPlanCanvas" 
+            class = "gpCanvas">
+          </canvas>
+          <canvas 
+            id = "bSplineCanvas" 
+            class = "bsCanvas">
+          </canvas>
+          <canvas
+            id="drawingCanvas"
+            class="topCanvas"><!-- This canvas stores user drawn lines-->
+          </canvas>
+          <canvas 
+            id="pointsCanvas"
+            class="pointsCanvas"> <!-- This canvas is used to display the extracted points-->
+          </canvas>
+          <div class ="xAxis" id = "xAxis">(0, 0)</div>
+          <span class="popuptext" id="myPopup">Invalid Stage Dimensions</span>
+          <span class="pointsPopup" id="pointsPopup">Points Are On</span>
+          <!--   <span class="popuptext" id="myPopup">Fix the Dimensions </span> -->
+          </div>
+          <div class = "hoverSideNavbar"> 
+            <div class = "iconsContainer">
+              <i class="fa fa-home" onclick = "callSideBar(0)" style='font-size:20px;color:white'></i>
+              <i class="fa fa-table" onclick = "callSideBar(1)" style='font-size:20px;color:white'></i>
+              <i class="fa fa-pencil" onclick = "callSideBar(2)" style='font-size:20px;color:white'></i>
+              <i class="fa fa-map" onclick = "callSideBar(3)" style='font-size:20px;color:white'></i>
+              <i class="fa fa-cloud" onclick = "callSideBar(4)" style = "font-size:20px; color:white;"></i>
+              <span class="iconify" onclick = "sendPath()" data-icon="mdi-robot" data-inline="false" style = "font-size:25px; color:white;" ></span>
+            </div>
+
+            <div id = "target" class = "sideBarDetails">
+              <div class ="baseSetting" >
+                <h2>Home</h2>
+                <div class = "displayDimensions">
+                  <h3 id = "widthDisplay"> Width of Stage: </h3>
+                  <h3 id = "heightDisplay"> Depth of Stage: </h3>
+                  <h3 id = "rateDisplay"> Critical Point Rate:</h3>
+                </div>
+                <div class = "inputArea">
+                  <form>
+                    <label>Width of Stage:</label>
+                    <div class = "widthInput">
+                      <input id = "stageWidth" value="" type="number" pattern="[0-9]+"/>
+                      <span class="field__helper">feet</span>
+                      <select class="inches" id="inchesWidth">
+                        <option value="0">0 in</option>
+                        <option value="1">1 in</option>
+                        <option value="2">2 in</option>
+                        <option value="3">3 in</option>
+                        <option value="4">4 in</option>
+                        <option value="5">5 in</option>
+                        <option value="6">6 in</option>
+                        <option value="7">7 in</option>
+                        <option value="8">8 in</option>
+                        <option value="8">9 in</option>
+                        <option value="10">10 in</option>
+                        <option value="11">11 in</option>
+                      </select>
+                    </div>
+                    <label for="length">Depth of Stage:</label>
+                    <div class = "lengthInput">
+                      <input id = "stageHeight" value="" type="number" pattern="[0-9]+" />
+                      <span class="field__helper">feet</span>
+                      <select class="inches" id="inchesHeight">
+                        <option value="0">0 in</option>
+                        <option value="1">1 in</option>
+                        <option value="2">2 in</option>
+                        <option value="3">3 in</option>
+                        <option value="4">4 in</option>
+                        <option value="5">5 in</option>
+                        <option value="6">6 in</option>
+                        <option value="7">7 in</option>
+                        <option value="8">8 in</option>
+                        <option value="8">9 in</option>
+                        <option value="10">10 in</option>
+                        <option value="11">11 in</option>
+                      </select>
+                    </div>
+                  </form>
+                  <div class = "dragBar">
+                    <div class = "sliderInner">
+                      <input
+                        type="range"
+                        min=".01"
+                        max="1"
+                        step=".01"
+                        value=".05"
+                        class="sldr"
+                        id="myRange"
+                      ></input >
+                    </div>
+                    <p id = "demo" class="sliderOutput"></p>
+                  </div>
+                </div>
+                <div class = "submitDimensions" onclick = "newTrack()"><h5>Submit</h5></div>
+              </div>
+            </div>
+          
+            <div id = "target" class = "sideBarDetails">
+              <div class ="baseSetting" >
+                <h2>Grid</h2>
+                <div class= "gridIntervals">
+                  <h4>Display Grid Intervals Every:</h4>
+                  <select class="frequency" id="frequency">
+                    <option value=".5">1/2</option>
+                    <option value=".33">1/3</option>
+                    <option value=".25">1/4</option>
+                    <option value=".2">1/5</option>
+                    <option value=".166">1/6</option>
+                    <option value=".142">1/7</option>
+                    <option value=".125">1/8</option>
+                  </select>
+                </div>
+                <div class = "gridToggleContainer">
+                  <h4>Toggle Grid</h4>
+                  <div class = "toggleAndButtons">
+                  <label class="switch">
+                    <input onclick="myFunction()" type="checkbox">
+                    <span class="slider"></span>
+                  </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id = "target" class = "sideBarDetails">
+              <div class ="baseSetting" >
+                <h2>Edit</h2>
+                <div class = "shell">
+                  <div class = "drawArea">
+                    <h3>Draw</h3>
+                    <div class = "pointsOutput" id = "pointsOutput">
+                    </div>
+                    <div class="drawButtons">
+                      <button onclick = "displayPoints()" type="getPoints">Get Points</button>
+                      <button id = "copyButton" onclick="copyPointsFunction()"> Copy Points</button>
+                    </div>
+                    <div class="drawButtons">
+                      <button onclick = "reloadPage()">Reset</button>
+                      <button> </button>
+                    </div>
+                    <div class = "togglePointsArea">
+                      <h3>User Drawing</h3>
+                      <label class="switch">
+                        <input onclick= "displayLine()" type="checkbox" id = "userDrawingCheckbox" checked >
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                    <div class = "togglePointsArea">
+                      <h3>Critcal Points</h3>
+                      <label class="switch">
+                        <input onclick= "drawCoordinates()" type="checkbox" >
+                        <span class="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class = "bSplineArea">
+                    <h3>Toggle B-Spline Curve</h3>
+                    <div class ="buttonAndToggleArea" style = "height: 40px; background-color: #eeeeee;">
+                    <label class="switch">
+                      <input onclick= "showBSplineCurve()" type="checkbox" >
+                      <span class="slider"></span>
+                    </label>
+                    <button id = "calcBSpline"     onclick="calculateBSpline()"> Calculate B-Spline</button>
+                    </div>
+                  </div>
+                  <div class = "eraseArea">
+                    <h3>Erase</h3>
+                    <div class="eraseButtons">
+                      <button id = "deleteInBetween" onclick = "eraseFunction()">Erase</button>
+                      <button id = "cancelEditButton">Cancel Edit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id = "target" class = "sideBarDetails">
+              <div class ="baseSetting" >
+                <h2>Ground Plan</h2>
+                <div class = "groundPlanContainer">
+                  <h3>Upload file</h3>
+                  <div class ="buttonAndToggleArea">
+                    <button onclick="document.getElementById('groundPlanSelect').click();" class = "uploadGroundPlanButton">Select File</button>
+                    <input style = "display: none;"" type="file" id = "groundPlanSelect" accept=".dxf" />
+                  </div>
+                </div>
+                <div class = "groundPlanContainer">
+                  <h3>Toggle Ground Plan</h3>
+                  <div class ="buttonAndToggleArea" style = "height: 45px; background-color: #eeeeee;">
+                    <label class="switch">
+                      <input onclick= "startGroundPlan()" type="checkbox" >
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id = "target" class = "sideBarDetails">
+              <div class ="baseSetting" >
+                <h2>Save/Upload</h2>
+                <div class = "saveWorkspace">
+                  <h3>Save Workspace</h3>
+                  <div class = "workspaceInner">
+                    <button class = "uploadWorkspaceButton" id = "saveWork">Save</button>
+                  </div>
+                </div>
+                <div class = "uploadWorkspace">
+                  <h3>Upload Workspace</h3>
+                  <div class = "workspaceInner">
+                    <button class =   "downloadWorkspaceButton" onclick="document.getElementById('docpicker').click();">Upload</button>
+                    <input style="display: none;" type="file" id="docpicker" accept=".csv,application/vnd.ms-excel,.xlt,application/vnd.ms-excel,.xla,application/vnd.ms-excel,.xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,.xltx,application/vnd.openxmlformats-officedocument.spreadsheetml.template,.xlsm,application/vnd.ms-excel.sheet.macroEnabled.12,.xltm,application/vnd.ms-excel.template.macroEnabled.12,.xlam,application/vnd.ms-excel.addin.macroEnabled.12,.xlsb,application/vnd.ms-excel.sheet.binary.macroEnabled.12"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>            
+        </div>
+      </div>
+    </body>
+  </html>
+  <script src = "/main.js"></script>
+  
+  
