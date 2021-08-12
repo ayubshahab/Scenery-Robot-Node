@@ -126,7 +126,7 @@ function sendPath() {
     data.push([realX, realY]);
   }
   var xhr = new XMLHttpRequest();
-  var url = "http://localhost:3000/input";
+  var url = "https://scenery-robot-node.herokuapp.com/input";
   xhr.open("POST", url, true);
   xhr.setRequestHeader("Content-Type", "application/json");
   var data = JSON.stringify({ path: data });
@@ -1174,7 +1174,7 @@ function getData(){
   var getData = null;
   var delayInMilliseconds = 1000; //1 second
   var localTimer = setInterval(function() {
-      let url = "http://localhost:3000/callPython";
+      let url = "https://scenery-robot-node.herokuapp.com/callPython";
   fetch(url)
   .then(response=>response.text())
   .then(data=>{
