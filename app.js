@@ -16,11 +16,12 @@ app.get("/input", function (req, res) {
 });
 
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.sendFile(__dirname + "/main.html");
+  //res.send("Hello World!");
 });
 
 app.get("/main.html", function (req, res) {
-  res.sendFile(__dirname + "/main.html");
+  //res.sendFile(__dirname + "/main.html");
 });
 
 app.listen(port, () => {
