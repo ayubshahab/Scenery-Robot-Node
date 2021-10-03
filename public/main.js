@@ -136,8 +136,21 @@ function sendPath() {
 
 //#region Grid Stuff
 /*---------------------------------------------Begin Display Grid (via Toggle Button) Section----------------------------------------------------------------------------*/
+
+window.onload = function(){
+  gridToggle();
+}
+
 var isGridToggled = false;
+var displayGridOnLoad = true;
+
 function myFunction() {
+  console.log("i was here");
+  removeGridIntervals();
+  displayGrid();
+}
+
+function gridToggle(){
   var elnt = document.getElementById("gridCanvas");
   if (isGridToggled == false) {
     isGridToggled = true;
@@ -149,6 +162,7 @@ function myFunction() {
     removeGridIntervals();
   }
 }
+
 
 //The following code draws a grid on a canvas
 //in order to get the grid to turn on and off, we will have to stack two canvas' on top of each other:
@@ -185,7 +199,7 @@ function drawBoard(intervalRate) {
     x += parseFloat(intervalRate / 2);
   }
 
-  ctx.strokeStyle = "gray";
+  ctx.strokeStyle = "#333333";
   ctx.lineWidth = 1;
   ctx.stroke();
 }
@@ -200,7 +214,14 @@ function clearGrid() {
 xAxisArray = [];
 yAxisArray = [];
 function displayGridIntervals() {
-  axisFrequency = document.getElementById("frequency").value;
+  var axisFrequency = 0;
+  if(displayGridOnLoad == true){
+    axisFrequency = .25;
+    displayGridOnLoad = false;
+  }else{
+    axisFrequency = document.getElementById("frequency").value;
+  }
+  
   yAxisArray.length = Math.floor(1 / axisFrequency);
   var intervalRate = displayYIntervals();
   xAxisArray.length = Math.floor(
@@ -226,13 +247,15 @@ function displayYIntervals() {
     div.style.width = "40px";
     div.style.height = "15px";
     div.style.position = "absolute";
-    div.style.color = "#00adb5";
+    // div.style.color = "#00adb5";
+    // div.style.color = "#FF9933";
+    div.style.color = "#666666";
     div.style.zIndex = "2";
     div.style.bottom = yLocation - (i + 1) * yGapRate + "px"; //+2px for the border height
     div.style.left += ".5%";
     div.style.fontSize = "13px";
     div.style.textAlign = "center";
-    div.style.borderBottom = "2px solid orange";
+    // div.style.borderBottom = "2px solid orange";
 
     var pixelValue = (i + 1) * yGapRate;
     var h1 = document.createElement("h4");
@@ -260,10 +283,12 @@ function displayXIntervals(intervalRate) {
     div.style.position = "absolute";
     div.style.zIndex = "2";
     div.style.bottom = ".5%";
-    div.style.color = "#00adb5";
+    // div.style.color = "#00adb5";
+    // div.style.color = "#FF9933";
+    div.style.color = "#666666";
     div.style.fontSize = "13px";
     div.style.textAlign = "center";
-    div.style.borderLeft = "2px solid orange";
+    // div.style.borderLeft = "2px solid orange";
     div.style.left += xLocation + (i + 1) * xGapRate + "px";
 
     var pixelValue = (i + 1) * xGapRate;
@@ -303,6 +328,7 @@ var stageHeight = 0;
 var isToggled = false;
 var haveDimensions = false;
 
+
 function newTrack() {
   var w, h;
   stageWidth = parseInt(document.getElementById("stageWidth").value, 10);
@@ -337,6 +363,7 @@ function newTrack() {
       "Critical Point Rate: " + interval + " ms";
     haveDimensions = true;
     isValidToDraw = true;
+    myFunction();
   }
 }
 
@@ -347,6 +374,8 @@ output.innerHTML = slider.value + " sec";
 slider.oninput = function () {
   output.innerHTML = this.value + " sec";
 };
+
+
 /*----------------------------------------------End Verifying Canvas Dimension Input Section----------------------------------------------------------------------------*/
 //#endregion
 
@@ -823,7 +852,7 @@ function criticalPoint(x, y) {
   this.width = 10;
   this.height = 10;
   this.isClicked = false;
-  this.color = "red";
+  this.color = "#339933";
 
   this.updateColor = function () {
     if (this.color == "red") {
@@ -860,7 +889,7 @@ var isDrawing = false;
 function draw(e) {
   if (isValidToDraw == true) {
     if (e.buttons !== 1) return;
-    context.strokeStyle = "black";
+    context.strokeStyle = "#336633";
     context.lineWidth = 1;
     isDrawing = true;
     context.beginPath(); // begin
@@ -1139,8 +1168,8 @@ function bSplineDisplayHelper(){
     splineCtx.moveTo(x, (Math.abs(generatedArray[i].y-rect.height)).toFixed(2));
     splineCtx.lineTo(generatedArray[i+1].x, (Math.abs(generatedArray[i+1].y-rect.height)).toFixed(2));
   }
-  splineCtx.strokeStyle = "blue";
-  splineCtx.lineWidth = 2;
+  splineCtx.strokeStyle = "#339933";
+  splineCtx.lineWidth = 1;
   splineCtx.stroke();
   splineCtx.closePath();
 }
@@ -1162,7 +1191,7 @@ function sendFetchRequest(){
   }
 
   var xhr = new XMLHttpRequest();
-  var url = "https://scenery-robot-node.herokuapp.com/callPython";
+  var url = "http://localhost:3000/callPython";
   xhr.open("POST", url, true);
   xhr.setRequestHeader("Content-Type", "application/json");
   var data = JSON.stringify({ path: data });
@@ -1175,7 +1204,7 @@ function getData(){
   var getData = null;
   var delayInMilliseconds = 1000; //1 second
   var localTimer = setInterval(function() {
-      let url = "https://scenery-robot-node.herokuapp.com/callPython";
+      let url = "http://localhost:3000/callPython";
   fetch(url)
   .then(response=>response.text())
   .then(data=>{
@@ -1327,7 +1356,7 @@ function drawLinesFromHistory() {
 
   context.lineWidth = 1;
   context.lineCap = "round";
-  context.strokeStyle = "black";
+  context.strokeStyle = "#336633";
 
   if (fullMouseHistoryPoints.length >= 2) {
     for (var i = 0; i < fullMouseHistoryPoints.length - 1; i++) {

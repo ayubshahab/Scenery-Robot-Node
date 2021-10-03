@@ -668,7 +668,8 @@ mark {
   width: auto;
   height: 100%;
   /*#696969*/
-  background-color: var(--accentColor);
+  /* background-color: var(--accentColor); */
+  background-color: #FF9933;
   position: relative;
   display: flex;
 }
@@ -680,7 +681,7 @@ mark {
   background-color: white;
   float: left;
   position: relative;
-  margin: 10px;
+  margin: 0px;
 }
 
 .leftContainer .popup {
@@ -761,32 +762,40 @@ mark {
 .topCanvas,/*Drawing canvas*/
 .pointsCanvas, /*critical Points canvas*/
 .gpCanvas, /*ground plan canvas*/
-.bsCanvas { /*BSpline canvas*/
+.bsCanvas, /*BSpline canvas*/
+.darkthemeCanvas { /*the dark theme canvas is used to set the background color black*/ 
   position: absolute;
   width: 100%;
   height: 100%;
   visibility: hidden;
 }
-.backgroundCanvas {
-  background-color: white;
+
+.darkthemeCanvas{
+  visibility: visible;
+  background-color: #121212;
   z-index: 1;
 }
+.backgroundCanvas {
+  /* background-color: white; */
+  z-index: 2;
+}
 
-.gpCanvas{
+.gpCanvas{ /*ground plan canvas*/
   background-color: rgba(106, 18, 18, 0.21);
   z-index: 3;
   opacity: 1;
 }
 
-.bsCanvas{
-  /*background-color: rgba(20, 49, 8, 0.32);*/
+.bsCanvas{ /*b spline canvas*/
+  /* background-color: rgba(20, 49, 8, 0.32); */
   z-index: 4;
 }
-.topCanvas {
+.topCanvas { /*drawing canvas*/
   z-index: 5;
   visibility: visible;
+  /* background-color: rgba(18,18,18, .8); */
 }
-.pointsCanvas {
+.pointsCanvas { /*show critical points canvas*/
   visibility: hidden;
   z-index: 10;
 }
@@ -1075,9 +1084,10 @@ form label {
   display: inline-block;
   width: 64px;
   height: 34px;
+  transform: rotate(180deg);
 }
 
-.slider {
+.slider { /*the outside large continer (rectangular)*/
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -1085,6 +1095,7 @@ form label {
   right: 0;
   bottom: 0;
   background-color: #696969;
+  /* background-color: green; */
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }

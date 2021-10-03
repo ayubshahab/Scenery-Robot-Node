@@ -255,8 +255,8 @@
         <!--          This container holds the canvas and the right input and output container        -->
         <div class="innerContainer" id = "innerCont">
           <!--          These are the canvases       -->
-          <div class = "leftContainer" id = "leftCont"> 
-            <canvas
+          <div class = "leftContainer" id = "leftCont"  > 
+          <canvas
             id="gridCanvas"
             class="backgroundCanvas"> <!-- This canvas stores grid lines-->
           </canvas>
@@ -275,6 +275,10 @@
           <canvas 
             id="pointsCanvas"
             class="pointsCanvas"> <!-- This canvas is used to display the extracted points-->
+          </canvas>
+          <canvas 
+            id="darkthemeCanvas"
+            class="darkthemeCanvas"> <!-- This canvas is used to display the extracted points-->
           </canvas>
           <div class ="xAxis" id = "xAxis">(0, 0)</div>
           <span class="popuptext" id="myPopup">Invalid Stage Dimensions</span>
@@ -364,21 +368,21 @@
                 <h2>Grid</h2>
                 <div class= "gridIntervals">
                   <h4>Display Grid Intervals Every:</h4>
-                  <select class="frequency" id="frequency">
-                    <option value=".5">1/2</option>
+                  <select class="frequency" id="frequency" onchange="myFunction()">
+                    <option value=".5" >1/2</option>
                     <option value=".33">1/3</option>
-                    <option value=".25">1/4</option>
-                    <option value=".2">1/5</option>
+                    <option value=".25" selected="selected">1/4</option>
+                    <option value=".2" >1/5</option>
                     <option value=".166">1/6</option>
-                    <option value=".142">1/7</option>
-                    <option value=".125">1/8</option>
+                    <option value=".142" >1/7</option>
+                    <option value=".125" >1/8</option>
                   </select>
                 </div>
                 <div class = "gridToggleContainer">
                   <h4>Toggle Grid</h4>
                   <div class = "toggleAndButtons">
                   <label class="switch">
-                    <input onclick="myFunction()" type="checkbox">
+                    <input onclick="gridToggle()" type="checkbox">
                     <span class="slider"></span>
                   </label>
                   </div>
@@ -405,14 +409,14 @@
                     <div class = "togglePointsArea">
                       <h3>User Drawing</h3>
                       <label class="switch">
-                        <input onclick= "displayLine()" type="checkbox" id = "userDrawingCheckbox" checked >
+                        <input onclick= "displayLine()" type="checkbox" id = "userDrawingCheckbox">
                         <span class="slider"></span>
                       </label>
                     </div>
                     <div class = "togglePointsArea">
                       <h3>Critcal Points</h3>
-                      <label class="switch">
-                        <input onclick= "drawCoordinates()" type="checkbox" >
+                      <label class="switch" >
+                        <input onclick= "drawCoordinates()" type="checkbox" checked>
                         <span class="slider"></span>
                       </label>
                     </div>
@@ -421,7 +425,7 @@
                     <h3>Toggle B-Spline Curve</h3>
                     <div class ="buttonAndToggleArea" style = "height: 40px; background-color: #eeeeee;">
                     <label class="switch">
-                      <input onclick= "showBSplineCurve()" type="checkbox" >
+                      <input onclick= "showBSplineCurve()" type="checkbox" checked>
                       <span class="slider"></span>
                     </label>
                     <button id = "calcBSpline"     onclick="calculateBSpline()"> Calculate B-Spline</button>
